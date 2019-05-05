@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
+import $ from "jquery";
 import { range, shuffle } from "lodash";
 import {
   colorsPluralForms,
@@ -97,13 +98,29 @@ class Intro extends React.Component {
       };
     });
 
+  completeStage = event => {
+    const { setCompleted } = this.props;
+    const { id } = this.props.match.params;
+
+    setCompleted(+id);
+
+    if (+id === 3) {
+      $("#modal").modal("show");
+      event.preventDefault();
+    }
+  };
+
+  onPlayClick = () => {
+    $("#modal").modal("hide");
+    this.props.history.push("/play");
+  };
+
   render() {
     const {
       completed,
       match: {
         params: { id }
-      },
-      setCompleted
+      }
     } = this.props;
     const {
       shapes,
@@ -127,37 +144,62 @@ class Intro extends React.Component {
               className="unstyled-link"
               to={id > 0 ? `/intro/${+id - 1}` : "/shapes"}
             >
-              <div className="display-1">
-                <span>&#60;</span>
-              </div>
+              <i className="fa fa-arrow-circle-left" />
             </Link>
           </div>
         </div>
         <div className="col-8">
-          <div className="display-4 text-center pt-5 pb-5">
-            Кликни на сите
-            {` ${colorsPluralForms[wantedColor]} ${
-              shapesPluralForms[wantedShape]
-            }`}
-          </div>
-          <div className="d-flex justify-content-center align-items-center full-height">
-            <div className="d-flex justify-content-between flex-wrap">
-              {shapes.map(item => {
-                const ShapeComponent = componentsMap[item.shape];
-                const strokeProps = item.selected
-                  ? { stroke: "black", strokeWidth: "3" }
-                  : {};
+          <div className="full-height">
+            <div className="responsive-text text-center pt-5 pb-5">
+              Кликни на сите
+              {` ${colorsPluralForms[wantedColor]} ${
+                shapesPluralForms[wantedShape]
+              }`}
+            </div>
+            <div className="d-flex justify-content-center align-items-center">
+              <div className="d-flex justify-content-between flex-wrap">
+                {shapes.map(item => {
+                  const ShapeComponent = componentsMap[item.shape];
+                  const strokeProps = item.selected
+                    ? { stroke: "black", strokeWidth: "3" }
+                    : {};
 
-                return (
-                  <div key={item.index} className="intro-shape">
-                    <ShapeComponent
-                      onClick={() => this.onShapeClick(item.index)}
-                      fill={item.color}
-                      {...strokeProps}
-                    />
+                  return (
+                    <div key={item.index} className="intro-shape">
+                      <ShapeComponent
+                        onClick={() => this.onShapeClick(item.index)}
+                        fill={item.color}
+                        {...strokeProps}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="modal fade" id="modal" tabIndex="-1">
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                  <div className="modal-header align-items-center justify-content-center responsive-modal-text">
+                    <div className="modal-title">Браво!</div>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                    >
+                      <div className="responsive-modal-text">&times;</div>
+                    </button>
                   </div>
-                );
-              })}
+                  <div className="modal-body text-center responsive-modal-text">
+                    <div>Спремен си да играш</div>
+                    <button
+                      className="btn btn-secondary btn-lg"
+                      onClick={this.onPlayClick}
+                    >
+                      Играј!
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -167,11 +209,9 @@ class Intro extends React.Component {
               <Link
                 className="unstyled-link"
                 to={`/intro/${+id + 1}`}
-                onClick={() => setCompleted(+id)}
+                onClick={this.completeStage}
               >
-                <div className="display-1">
-                  <span>&#62;</span>
-                </div>
+                <i className="fa fa-arrow-circle-right" />
               </Link>
             </div>
           )}

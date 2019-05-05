@@ -1,8 +1,11 @@
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min";
+import "popper.js/dist/popper.min";
+import "font-awesome/css/font-awesome.min.css";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Link, Redirect, Route, Switch } from "react-router-dom";
 import Shapes from "./pages/Shapes";
 import Game from "./pages/Game";
@@ -15,7 +18,14 @@ const App = props => {
   return (
     <BrowserRouter>
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <button
+          className="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <div className="navbar-nav">
             <Link
               onClick={resetState}
@@ -31,14 +41,12 @@ const App = props => {
         </div>
       </nav>
       <div className="container-fluid bg-info">
-        <div>
-          <Switch>
-            <Route path="/shapes" component={Shapes} />
-            <Route path="/play" component={Game} />
-            <Route path="/intro/:id" component={Intro} />
-            <Redirect to="/shapes" />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/shapes" component={Shapes} />
+          <Route path="/play" component={Game} />
+          <Route path="/intro/:id" component={Intro} />
+          <Redirect to="/shapes" />
+        </Switch>
       </div>
     </BrowserRouter>
   );
