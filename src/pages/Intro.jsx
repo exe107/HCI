@@ -149,19 +149,19 @@ class Intro extends React.Component {
           </div>
         </div>
         <div className="col-8">
-          <div className="full-height">
-            <div className="responsive-text text-center pt-5 pb-5">
+          <div className="d-flex flex-wrap full-height">
+            <h1 className="intro-heading text-center w-100">
               Кликни на сите
               {` ${colorsPluralForms[wantedColor]} ${
                 shapesPluralForms[wantedShape]
               }`}
-            </div>
-            <div className="d-flex justify-content-center align-items-center">
-              <div className="d-flex justify-content-between flex-wrap">
+            </h1>
+            <div className="intro-shapes">
+              <div className="d-flex flex-wrap w-100 h-100">
                 {shapes.map(item => {
                   const ShapeComponent = componentsMap[item.shape];
                   const strokeProps = item.selected
-                    ? { stroke: "black", strokeWidth: "3" }
+                    ? { stroke: "black", strokeWidth: "5" }
                     : {};
 
                   return (
@@ -176,28 +176,24 @@ class Intro extends React.Component {
                 })}
               </div>
             </div>
-            <div className="modal fade" id="modal" tabIndex="-1">
-              <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                  <div className="modal-header align-items-center justify-content-center responsive-modal-text">
-                    <div className="modal-title">Браво!</div>
-                    <button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                    >
-                      <div className="responsive-modal-text">&times;</div>
-                    </button>
-                  </div>
-                  <div className="modal-body text-center responsive-modal-text">
-                    <div>Спремен си да играш</div>
-                    <button
-                      className="btn btn-secondary btn-lg"
-                      onClick={this.onPlayClick}
-                    >
-                      Играј!
-                    </button>
-                  </div>
+          </div>
+          <div className="modal fade" id="modal" tabIndex="-1">
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header align-items-center justify-content-center responsive-modal-text">
+                  <div className="modal-title">Браво!</div>
+                  <button type="button" className="close" data-dismiss="modal">
+                    <div className="responsive-modal-text">&times;</div>
+                  </button>
+                </div>
+                <div className="modal-body text-center responsive-modal-text">
+                  <div>Спремен си да играш</div>
+                  <button
+                    className="btn btn-secondary btn-lg"
+                    onClick={this.onPlayClick}
+                  >
+                    Играј!
+                  </button>
                 </div>
               </div>
             </div>
