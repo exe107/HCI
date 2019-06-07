@@ -2,7 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min";
 import "popper.js/dist/popper.min";
-import "font-awesome/css/font-awesome.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -32,15 +32,21 @@ const App = props => {
               className="nav-item nav-link"
               to="/shapes"
             >
-              Учи форми
+              <h5>
+                <i className="fa fa-shapes mr-1" />
+                Учи форми
+              </h5>
             </Link>
             <Link className="nav-item nav-link" to="/play">
-              Нова игра
+              <h5>
+                <i className="fa fa-gamepad mr-1" />
+                Нова игра
+              </h5>
             </Link>
           </div>
         </div>
       </nav>
-      <div className="container-fluid bg-info">
+      <div className="container-fluid app-bg">
         <Switch>
           <Route path="/shapes" component={Shapes} />
           <Route path="/play" component={Game} />

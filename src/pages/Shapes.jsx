@@ -15,11 +15,15 @@ export default class Shapes extends React.Component {
             <div className="d-flex justify-content-between align-items-center shapes-row w-100">
               <div className="shape-container">
                 <Rectangle />
-                <div className="text-center responsive-text">Правоаголник</div>
+                <div className="text-center responsive-text">
+                  Правоаголник
+                </div>
               </div>
               <div className="shape-container">
                 <Triangle />
-                <div className="text-center responsive-text">Триаголник</div>
+                <div className="text-center responsive-text">
+                  Триаголник
+                </div>
               </div>
             </div>
             <div className="d-flex justify-content-between shapes-row w-100">
@@ -37,7 +41,7 @@ export default class Shapes extends React.Component {
         <div className="col-2">
           <div className="d-flex justify-content-center align-items-center h-100">
             <Link className="unstyled-link" to="/intro/0">
-              <i className="fa fa-arrow-circle-right" />
+              <i className="fa fa-arrow-circle-right np" />
             </Link>
           </div>
         </div>

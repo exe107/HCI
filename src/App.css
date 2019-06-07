@@ -1,9 +1,13 @@
+.app-bg {
+  background: skyblue;
+}
+
 .full-height {
-  height: calc(100vh - 56px);
+  height: calc(100vh - 64px);
 }
 
 .shapes-row {
-  height: calc(45vh - 56px);
+  height: calc(45vh - 64px);
 }
 
 .shape-container {
@@ -24,7 +28,7 @@
   font-size: 10vh;
 }
 
-i.fa {
+.np {
   font-size: 4vw;
 }
 
@@ -63,8 +67,6 @@ i.fa {
 .flip-container {
   width: 15%;
   height: 30%;
-  margin-right: 20px;
-  margin-bottom: 20px;
   perspective: 1000px;
 }
 
@@ -102,4 +104,12 @@ i.fa {
 
 .back {
   transform: rotateY(180deg);
+}
+
+.h-15 {
+  height: 15%;
+}
+
+.h-85 {
+  height: 85%;
 }

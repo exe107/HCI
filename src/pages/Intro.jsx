@@ -144,7 +144,7 @@ class Intro extends React.Component {
               className="unstyled-link"
               to={id > 0 ? `/intro/${+id - 1}` : "/shapes"}
             >
-              <i className="fa fa-arrow-circle-left" />
+              <i className="fa fa-arrow-circle-left np" />
             </Link>
           </div>
         </div>
@@ -160,9 +160,10 @@ class Intro extends React.Component {
               <div className="d-flex flex-wrap w-100 h-100">
                 {shapes.map(item => {
                   const ShapeComponent = componentsMap[item.shape];
-                  const strokeProps = item.selected
-                    ? { stroke: "black", strokeWidth: "5" }
-                    : {};
+                  const strokeProps = item.selected && {
+                    stroke: "black",
+                    strokeWidth: "5"
+                  };
 
                   return (
                     <div key={item.index} className="intro-shape">
@@ -207,7 +208,7 @@ class Intro extends React.Component {
                 to={`/intro/${+id + 1}`}
                 onClick={this.completeStage}
               >
-                <i className="fa fa-arrow-circle-right" />
+                <i className="fa fa-arrow-circle-right np" />
               </Link>
             </div>
           )}
