@@ -10,6 +10,7 @@ import { BrowserRouter, Link, Redirect, Route, Switch } from "react-router-dom";
 import Shapes from "./pages/Shapes";
 import Game from "./pages/Game";
 import Intro from "./pages/Intro";
+import Ending from "./pages/ending/Ending";
 import * as Actions from "./redux/actions";
 
 const App = props => {
@@ -37,7 +38,7 @@ const App = props => {
                 Учи форми
               </h5>
             </Link>
-            <Link className="nav-item nav-link" to="/play">
+            <Link className="nav-item nav-link" to="/play?reset=1">
               <h5>
                 <i className="fa fa-gamepad mr-1" />
                 Нова игра
@@ -46,11 +47,12 @@ const App = props => {
           </div>
         </div>
       </nav>
-      <div className="container-fluid app-bg">
+      <div className="container-fluid app-bg full-height">
         <Switch>
           <Route path="/shapes" component={Shapes} />
           <Route path="/play" component={Game} />
           <Route path="/intro/:id" component={Intro} />
+          <Route path="/ending" component={Ending} />
           <Redirect to="/shapes" />
         </Switch>
       </div>

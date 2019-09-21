@@ -20,7 +20,7 @@ export default class Shapes extends React.Component {
                 </div>
               </div>
               <div className="shape-container">
-                <Triangle />
+                <Triangle offset={20} />
                 <div className="text-center responsive-text">
                   Триаголник
                 </div>

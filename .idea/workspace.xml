@@ -1,17 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+  <component name="ChangeListManager">
+    <list default="true" id="c5e0d33d-c0f0-4378-b320-2378e2d4c2bf" name="Default Changelist" comment="HCI">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/ending/Ending.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Game.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Game.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Intro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Intro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Shapes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Shapes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/constants.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shapes/Rectangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shapes/Rectangle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/shapes/Triangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/shapes/Triangle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <list id="5d75cd18-335a-4153-85f5-59ca60977656" name="dont commit" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1R9GHFq23pdE2fxBuRIEIBU1bFZ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\exe\Desktop\Fax\NICHK\cards\node_modules\prettier" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2018.3.5\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\exe\Desktop\Fax\NICHK\cards\src\pages\ending" />
+      <recent name="C:\Users\exe\Desktop\Fax\NICHK\cards\src\pages" />
+      <recent name="C:\Users\exe\Desktop\Fax\NICHK\cards\src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.npm start">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c5e0d33d-c0f0-4378-b320-2378e2d4c2bf" name="Default Changelist" comment="" />
+      <changelist id="5d75cd18-335a-4153-85f5-59ca60977656" name="dont commit" comment="" />
+      <created>1556310685716</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1556310685716</updated>
+      <workItem from="1556310688112" duration="5364000" />
+      <workItem from="1556387520253" duration="13062000" />
+      <workItem from="1556400830767" duration="609000" />
+      <workItem from="1556969843417" duration="31855000" />
+      <workItem from="1557066668685" duration="15007000" />
+      <workItem from="1557498726721" duration="50000" />
+      <workItem from="1557499166738" duration="87000" />
+      <workItem from="1557505677805" duration="2843000" />
+      <workItem from="1557573733564" duration="9482000" />
+      <workItem from="1558019398860" duration="28000" />
+      <workItem from="1559912960575" duration="16264000" />
+      <workItem from="1560008379313" duration="290000" />
+      <workItem from="1569071818895" duration="16227000" />
+    </task>
+    <task id="LOCAL-00001" summary="HCI">
+      <created>1557004738846</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1557004738846</updated>
+    </task>
+    <task id="LOCAL-00002" summary="HCI">
+      <created>1557083014468</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557083014468</updated>
+    </task>
+    <task id="LOCAL-00003" summary="HCI">
+      <created>1557583890686</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1557583890686</updated>
+    </task>
+    <task id="LOCAL-00004" summary="HCI">
+      <created>1557583934722</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1557583934722</updated>
+    </task>
+    <task id="LOCAL-00005" summary="HCI">
+      <created>1559931487603</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1559931487603</updated>
+    </task>
+    <task id="LOCAL-00006" summary="HCI">
+      <created>1569075280965</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569075280965</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="HCI" />
+    <option name="LAST_COMMIT_MESSAGE" value="HCI" />
+    <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="masterDetails">
     <states>

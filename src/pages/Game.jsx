@@ -1,10 +1,31 @@
 import * as React from "react";
 import { range, shuffle } from "lodash";
+import { parse } from "qs";
 import { componentsMap } from "./constants";
 import cardImg from "../card.png";
 import { generateShape } from "./helper";
 
 export default class Game extends React.Component {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { history, location } = this.props;
+
+    const queryStringObj = parse(location.search, {
+      ignoreQueryPrefix: true
+    });
+
+    if (queryStringObj.reset) {
+      history.replace("/play");
+
+      this.setState({
+        cardsCount: 6,
+        cards: this.generateCards(6, 0),
+        selectedCards: [],
+        up: 0,
+        counter: 0
+      });
+    }
+  }
+
   generateCards = (cardsCount, counter) => {
     const cards = [];
     const pairsCount = cardsCount / 2;
@@ -77,17 +98,23 @@ export default class Game extends React.Component {
   };
 
   nextLevel = () => {
-    this.setState(prevState => {
-      const cardsCount = prevState.cardsCount + 2;
-      const counter = prevState.counter + cardsCount;
+    const { cardsCount } = this.state;
 
-      return {
-        cardsCount,
-        cards: this.generateCards(cardsCount, counter),
-        up: 0,
-        counter
-      };
-    });
+    if (cardsCount < 12) {
+      this.setState(prevState => {
+        const cardsCount = prevState.cardsCount + 2;
+        const counter = prevState.counter + cardsCount;
+
+        return {
+          cardsCount,
+          cards: this.generateCards(cardsCount, counter),
+          up: 0,
+          counter
+        };
+      });
+    } else {
+      this.props.history.push("/ending");
+    }
   };
 
   render() {

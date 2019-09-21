@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import $ from "jquery";
 import { range, shuffle } from "lodash";
 import {
@@ -11,6 +12,13 @@ import {
 } from "./constants";
 import { randomColor } from "./helper";
 import * as Actions from "../redux/completed/actions";
+
+const ShapeContainer = styled.div`
+  width: 20%;
+  height: calc(30% - 3%);
+  margin-right: ${props => ((props.index + 1) % 4 === 0 ? 0 : "6%")};
+  margin-bottom: 3%;
+`;
 
 class Intro extends React.Component {
   state = {};
@@ -157,22 +165,22 @@ class Intro extends React.Component {
               }`}
             </h1>
             <div className="intro-shapes">
-              <div className="d-flex flex-wrap w-100 h-100">
-                {shapes.map(item => {
+              <div className="d-flex justify-content-center flex-wrap w-100 h-100">
+                {shapes.map((item, index) => {
                   const ShapeComponent = componentsMap[item.shape];
                   const strokeProps = item.selected && {
                     stroke: "black",
-                    strokeWidth: "5"
+                    strokeWidth: "3"
                   };
 
                   return (
-                    <div key={item.index} className="intro-shape">
+                    <ShapeContainer key={item.index} index={index}>
                       <ShapeComponent
                         onClick={() => this.onShapeClick(item.index)}
                         fill={item.color}
                         {...strokeProps}
                       />
-                    </div>
+                    </ShapeContainer>
                   );
                 })}
               </div>
