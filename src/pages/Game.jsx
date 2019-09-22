@@ -5,6 +5,8 @@ import { componentsMap } from "./constants";
 import cardImg from "../card.png";
 import { generateShape } from "./helper";
 
+let ID = 0;
+
 export default class Game extends React.Component {
   componentDidMount() {
     this.props.history.replace("/play");
@@ -22,21 +24,21 @@ export default class Game extends React.Component {
 
       this.setState({
         cardsCount: 6,
-        cards: this.generateCards(6, 0),
+        cards: this.generateCards(6),
         selectedCards: [],
-        up: 0,
-        counter: 0
+        up: 0
       });
     }
   }
 
-  generateCards = (cardsCount, counter) => {
+  generateCards = cardsCount => {
     const cards = [];
     const pairsCount = cardsCount / 2;
 
-    range(0, pairsCount).forEach(index => {
-      const card = this.generateCard(counter + index);
-      const duplicate = { ...card, index: counter + index + pairsCount };
+    range(0, pairsCount).forEach(() => {
+      const id = ID++;
+      const card = this.generateCard(id);
+      const duplicate = { ...card, id: ID++ };
       cards.push(card);
       cards.push(duplicate);
     });
@@ -44,11 +46,11 @@ export default class Game extends React.Component {
     return shuffle(cards);
   };
 
-  generateCard = index => {
-    const shape = generateShape(index);
+  generateCard = id => {
+    const shape = generateShape(id / 2);
 
     return {
-      index,
+      id,
       flipped: true,
       ...shape
     };
@@ -56,22 +58,21 @@ export default class Game extends React.Component {
 
   state = {
     cardsCount: 6,
-    cards: this.generateCards(6, 0),
+    cards: this.generateCards(6),
     selectedCards: [],
-    up: 0,
-    counter: 0
+    up: 0
   };
 
-  flipCard = index =>
+  flipCard = id =>
     this.setState(prevState => {
       const { cards, selectedCards } = prevState;
 
-      const card = cards.find(card => index === card.index);
+      const card = cards.find(card => id === card.id);
 
       if (card.flipped && selectedCards.length < 2) {
         return {
           cards: cards.map(card =>
-            index === card.index ? { ...card, flipped: false } : card
+            id === card.id ? { ...card, flipped: false } : card
           ),
           selectedCards: [...selectedCards, card]
         };
@@ -79,14 +80,14 @@ export default class Game extends React.Component {
     });
 
   compareCards = (card1, card2) => {
-    const { color: color1, shape: shape1, index: index1 } = card1;
-    const { color: color2, shape: shape2, index: index2 } = card2;
+    const { color: color1, shape: shape1, id: id1 } = card1;
+    const { color: color2, shape: shape2, id: id2 } = card2;
 
     setTimeout(() => {
       if (shape1 !== shape2 || color1 !== color2) {
         this.setState(prevState => ({
           cards: prevState.cards.map(card =>
-            card.index === index1 || card.index === index2
+            card.id === id1 || card.id === id2
               ? { ...card, flipped: true }
               : card
           ),
@@ -107,13 +108,11 @@ export default class Game extends React.Component {
     if (cardsCount < 12) {
       this.setState(prevState => {
         const cardsCount = prevState.cardsCount + 2;
-        const counter = prevState.counter + cardsCount;
 
         return {
           cardsCount,
-          cards: this.generateCards(cardsCount, counter),
-          up: 0,
-          counter
+          cards: this.generateCards(cardsCount),
+          up: 0
         };
       });
     } else {
@@ -148,9 +147,9 @@ export default class Game extends React.Component {
 
                 return (
                   <div
-                    key={card.index}
+                    key={card.id}
                     className={`flip-container ${!isFlipped ? "face-up" : ""}`}
-                    onClick={() => this.flipCard(card.index)}
+                    onClick={() => this.flipCard(card.id)}
                   >
                     <div className={`flipper ${!isFlipped ? "face-up" : ""}`}>
                       <div className="front">
@@ -165,10 +164,9 @@ export default class Game extends React.Component {
               })}
             </div>
             <div className="progress h-3">
-                <div
-                  className={`progress-bar bg-success w-${progressBarWidth}`}
-                />
-
+              <div
+                className={`progress-bar bg-success w-${progressBarWidth}`}
+              />
             </div>
           </div>
         </div>
