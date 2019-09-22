@@ -147,22 +147,19 @@ class Intro extends React.Component {
     return (
       <div className="row">
         <div className="col-2">
-          <div className="d-flex justify-content-center align-items-center h-100">
-            <Link
-              className="unstyled-link"
-              to={id > 0 ? `/intro/${+id - 1}` : "/shapes"}
-            >
-              <i className="fa fa-arrow-circle-left np" />
-            </Link>
-          </div>
+          {+id > 0 && (
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <Link className="unstyled-link" to={`/intro/${+id - 1}`}>
+                <i className="fa fa-arrow-circle-left np" />
+              </Link>
+            </div>
+          )}
         </div>
         <div className="col-8">
           <div className="d-flex flex-wrap full-height">
             <h1 className="intro-heading text-center w-100">
               Кликни на сите
-              {` ${colorsPluralForms[wantedColor]} ${
-                shapesPluralForms[wantedShape]
-              }`}
+              {` ${colorsPluralForms[wantedColor]} ${shapesPluralForms[wantedShape]}`}
             </h1>
             <div className="intro-shapes">
               <div className="d-flex justify-content-center flex-wrap w-100 h-100">
@@ -201,7 +198,7 @@ class Intro extends React.Component {
                     className="btn btn-secondary btn-lg"
                     onClick={this.onPlayClick}
                   >
-                    Играј!
+                    <i className="fa fa-play" />
                   </button>
                 </div>
               </div>

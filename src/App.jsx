@@ -28,21 +28,27 @@ const App = props => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <div className="navbar-nav">
+            <Link className="nav-item nav-link" to="/shapes">
+              <h4>
+                <i className="fa fa-book-open mr-1" />
+                Форми
+              </h4>
+            </Link>
             <Link
               onClick={resetState}
               className="nav-item nav-link"
-              to="/shapes"
+              to="/intro/0"
             >
-              <h5>
+              <h4>
                 <i className="fa fa-shapes mr-1" />
-                Учи форми
-              </h5>
+                Вежбај
+              </h4>
             </Link>
             <Link className="nav-item nav-link" to="/play?reset=1">
-              <h5>
+              <h4>
                 <i className="fa fa-gamepad mr-1" />
                 Нова игра
-              </h5>
+              </h4>
             </Link>
           </div>
         </div>

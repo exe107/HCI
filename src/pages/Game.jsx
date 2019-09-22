@@ -6,6 +6,10 @@ import cardImg from "../card.png";
 import { generateShape } from "./helper";
 
 export default class Game extends React.Component {
+  componentDidMount() {
+    this.props.history.replace("/play");
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { history, location } = this.props;
 
@@ -125,8 +129,8 @@ export default class Game extends React.Component {
     }
 
     const level = (cardsCount - 6) / 2 + 1;
-
     const finished = up === cardsCount;
+    const progressBarWidth = 25 * (finished ? level : level - 1);
 
     return (
       <div className="row">
@@ -137,7 +141,7 @@ export default class Game extends React.Component {
               Ниво {level}
               {finished && <i className="fa fa-check text-success ml-1" />}
             </div>
-            <div className="d-flex flex-wrap justify-content-between w-100 h-85">
+            <div className="d-flex flex-wrap justify-content-between w-100 h-80">
               {cards.map(card => {
                 const ShapeComponent = componentsMap[card.shape];
                 const isFlipped = card.flipped;
@@ -159,6 +163,12 @@ export default class Game extends React.Component {
                   </div>
                 );
               })}
+            </div>
+            <div className="progress h-3">
+                <div
+                  className={`progress-bar bg-success w-${progressBarWidth}`}
+                />
+
             </div>
           </div>
         </div>

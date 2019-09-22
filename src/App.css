@@ -3,7 +3,7 @@
 }
 
 .full-height {
-  height: calc(100vh - 64px) !important;
+  height: calc(100vh - 68px) !important;
 }
 
 .shapes-row {
@@ -106,12 +106,20 @@
   transform: rotateY(180deg);
 }
 
+.h-3 {
+  height: 3% !important;
+}
+
 .h-15 {
   height: 15%;
 }
 
-.h-85 {
-  height: 85%;
+.h-80 {
+  height: 80%;
+}
+
+.w-0 {
+  width: 0;
 }
 
 .congrats {
