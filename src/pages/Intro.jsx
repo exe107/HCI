@@ -5,12 +5,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import $ from "jquery";
 import { range, shuffle } from "lodash";
-import {
-  colorsPluralForms,
-  componentsMap,
-  shapesPluralForms
-} from "./constants";
-import { randomColor } from "./helper";
+import { colorsMap, componentsMap } from "./constants";
+import { randomColor, resolveShapeAndColorAudio } from "./helper";
 import * as Actions from "../redux/completed/actions";
 
 const ShapeContainer = styled.div`
@@ -48,7 +44,14 @@ class Intro extends React.Component {
     range(1, 12).forEach(index => {
       const shape = shapes[index % 4];
       const color = randomColor();
-      const correct = shape === wantedShape && color === wantedColor;
+      const isWantedShapeRectangle = wantedShape === "R";
+
+      const correctShape = isWantedShapeRectangle
+        ? shape === "R" || shape === "S"
+        : shape === wantedShape;
+
+      const correctColor = color === wantedColor;
+      const correct = correctShape && correctColor;
 
       randomShapes.push({
         index,
@@ -123,6 +126,18 @@ class Intro extends React.Component {
     this.props.history.push("/play");
   };
 
+  playAudio = () => document.getElementById("audio-player").play();
+
+  componentDidMount() {
+    this.playAudio();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.wantedShape !== this.state.wantedShape) {
+      this.playAudio();
+    }
+  }
+
   render() {
     const {
       completed,
@@ -139,30 +154,32 @@ class Intro extends React.Component {
       wantedColor
     } = this.state;
 
+    const wantedColorId = colorsMap[wantedColor];
+
+    const audioSrc = resolveShapeAndColorAudio(
+      `${wantedColorId}${wantedShape}`
+    );
+
+    const playAudio = () => document.getElementById("audio-player").play();
+
     const showNext =
       completed ||
       (selectedShapesCount === correctSelectedShapesCount &&
         correctSelectedShapesCount === correctShapesCount);
 
     return (
-      <div className="row">
-        <div className="col-2">
-          {+id > 0 && (
-            <div className="d-flex justify-content-center align-items-center h-100">
-              <Link className="unstyled-link" to={`/intro/${+id - 1}`}>
-                <i className="fa fa-arrow-circle-left np" />
-              </Link>
+      <div className="row no-gutters">
+        <div className="col-1"></div>
+        <div className="col-10">
+          <div className="full-height">
+            <audio id="audio-player" src={audioSrc} autoPlay></audio>
+            <div className="text-center py-2">
+              <button className="btn btn-secondary" onClick={playAudio}>
+                <i className="fa fa-volume-up" />
+              </button>
             </div>
-          )}
-        </div>
-        <div className="col-8">
-          <div className="d-flex flex-wrap full-height">
-            <h1 className="intro-heading text-center w-100">
-              Кликни на сите
-              {` ${colorsPluralForms[wantedColor]} ${shapesPluralForms[wantedShape]}`}
-            </h1>
             <div className="intro-shapes">
-              <div className="d-flex justify-content-center flex-wrap w-100 h-100">
+              <div className="d-flex flex-wrap w-100 h-100">
                 {shapes.map((item, index) => {
                   const ShapeComponent = componentsMap[item.shape];
                   const strokeProps = item.selected && {
@@ -182,6 +199,19 @@ class Intro extends React.Component {
                 })}
               </div>
             </div>
+            {showNext && (
+              <div className="text-center">
+                <Link
+                  className="unstyled-link"
+                  to={`/intro/${+id + 1}`}
+                  onClick={this.completeStage}
+                >
+                  <button className="btn btn-secondary">
+                    <i className="fa fa-arrow-right" />
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
           <div className="modal fade" id="modal" tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered">
@@ -205,19 +235,7 @@ class Intro extends React.Component {
             </div>
           </div>
         </div>
-        <div className="col-2">
-          {showNext && (
-            <div className="d-flex justify-content-center align-items-center h-100">
-              <Link
-                className="unstyled-link"
-                to={`/intro/${+id + 1}`}
-                onClick={this.completeStage}
-              >
-                <i className="fa fa-arrow-circle-right np" />
-              </Link>
-            </div>
-          )}
-        </div>
+        <div className="col-1"></div>
       </div>
     );
   }

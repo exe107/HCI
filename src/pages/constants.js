@@ -3,30 +3,25 @@ import { Rectangle } from "./shapes/Rectangle";
 import { Triangle } from "./shapes/Triangle";
 import { Circle } from "./shapes/Circle";
 
-const shapesMap = ["S", "R", "T", "C"];
-const colorsMap = ["#F62817", "#1589FF", "#4AA02C"];
+const shapes = ["S", "R", "T", "C"];
+const colors = ["#F62817", "#1589FF", "#4AA02C"];
+
+const colorsMap = {
+  "#F62817": "R",
+  "#1589FF": "B",
+  "#4AA02C": "G"
+};
+
 const componentsMap = {
   S: Square,
   R: Rectangle,
   T: Triangle,
   C: Circle
 };
-const colorsPluralForms = {
-  '#F62817': "црвени",
-  '#1589FF': "плави",
-  '#4AA02C': "зелени"
-};
-const shapesPluralForms = {
-  S: "квадрати",
-  R: "правоаголници",
-  T: "триаголници",
-  C: "кругови"
-};
 
 export {
-  shapesMap,
+  shapes,
+  colors,
   colorsMap,
-  componentsMap,
-  colorsPluralForms,
-  shapesPluralForms
+  componentsMap
 };

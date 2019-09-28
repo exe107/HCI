@@ -1,9 +1,26 @@
 import * as React from "react";
+import styled from "styled-components";
 import { range, shuffle } from "lodash";
 import { parse } from "qs";
 import { componentsMap } from "./constants";
 import cardImg from "../card.png";
 import { generateShape } from "./helper";
+
+const FlipContainer = styled.div`
+  @media (min-width: 576px) {
+    width: 15%;
+    height: 30%;
+    perspective: 1000px;
+    margin-right: ${props => ((props.index + 1) % 5 === 0 ? 0 : "6%")};
+  }
+
+  @media (max-width: 576px) {
+    width: 20%;
+    height: 20%;
+    perspective: 1000px;
+    margin-right: ${props => ((props.index + 1) % 4 === 0 ? 0 : "6%")};
+  }
+`;
 
 let ID = 0;
 
@@ -136,19 +153,23 @@ export default class Game extends React.Component {
         <div className="col-1" />
         <div className="col-10">
           <div className="full-height">
-            <div className="d-flex align-items-center justify-content-center responsive-text h-15">
-              Ниво {level}
-              {finished && <i className="fa fa-check text-success ml-1" />}
+            <div className="pt-3 mb-4">
+              <div className="progress">
+                <div
+                  className={`progress-bar bg-success w-${progressBarWidth}`}
+                />
+              </div>
             </div>
-            <div className="d-flex flex-wrap justify-content-between w-100 h-80">
-              {cards.map(card => {
+            <div className="d-flex flex-wrap cards-container">
+              {cards.map((card, index) => {
                 const ShapeComponent = componentsMap[card.shape];
                 const isFlipped = card.flipped;
 
                 return (
-                  <div
+                  <FlipContainer
                     key={card.id}
-                    className={`flip-container ${!isFlipped ? "face-up" : ""}`}
+                    className={`${!isFlipped ? "face-up" : ""}`}
+                    index={index}
                     onClick={() => this.flipCard(card.id)}
                   >
                     <div className={`flipper ${!isFlipped ? "face-up" : ""}`}>
@@ -159,26 +180,20 @@ export default class Game extends React.Component {
                         <ShapeComponent fill={card.color} />
                       </div>
                     </div>
-                  </div>
+                  </FlipContainer>
                 );
               })}
             </div>
-            <div className="progress h-3">
-              <div
-                className={`progress-bar bg-success w-${progressBarWidth}`}
-              />
-            </div>
+            {finished && (
+              <div className="text-center">
+                <button className="btn btn-secondary" onClick={this.nextLevel}>
+                  <i className="fa fa-arrow-right" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
-        <div className="col-1">
-          {finished && (
-            <div className="d-flex justify-content-center align-items-center h-100">
-              <button className="btn" onClick={this.nextLevel}>
-                <i className="fa fa-arrow-circle-right np" />
-              </button>
-            </div>
-          )}
-        </div>
+        <div className="col-1"></div>
       </div>
     );
   }

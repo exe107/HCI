@@ -5,9 +5,9 @@ export const Triangle = props => {
   const offsetValue = offset || 0;
 
   return (
-    <svg className="shape" preserveAspectRatio="none" viewBox="-3 -2 105 105">
+    <svg className="shape" viewBox="-3 -2 105 105">
       <polygon
-        points={`50,0 ${100 - offsetValue},100 ${offsetValue},100`}
+        points={`${100 - offsetValue},100 50,0 ${offsetValue},100`}
         {...rest}
       />
     </svg>
