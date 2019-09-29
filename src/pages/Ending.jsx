@@ -2,7 +2,7 @@ import * as React from "react";
 import ending from "../images/ending.gif";
 
 const Ending = props => {
-  setTimeout(() => props.history.push("/home"), 7500);
+  setTimeout(() => props.history.push("/menu"), 7500);
 
   return (
     <div className="full-height">

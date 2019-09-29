@@ -7,7 +7,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BrowserRouter, Link, Redirect, Route, Switch } from "react-router-dom";
-import Home from "./pages/Home";
+import Menu from "./pages/Menu";
 import Shapes from "./pages/Shapes";
 import Game from "./pages/Game";
 import Intro from "./pages/Intro";
@@ -20,7 +20,7 @@ const App = props => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/home" component={Home} />
+        <Route path="/menu" component={Menu} />
         <Route path="/ending" component={Ending} />
         <Route>
           <nav className="navbar navbar-expand-sm navbar-light bg-light">
@@ -66,7 +66,7 @@ const App = props => {
               <Route path="/shapes" component={Shapes} />
               <Route path="/play" component={Game} />
               <Route path="/intro/:id" component={Intro} />
-              <Redirect to="/home" />
+              <Redirect to="/menu" />
             </Switch>
           </div>
         </Route>
