@@ -1,13 +1,18 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import $ from "jquery";
 import { range, shuffle } from "lodash";
-import { colorsMap, componentsMap } from "./constants";
-import { randomColor, resolveShapeAndColorAudio } from "./helper";
+import { CANVAS_ID, colorsMap, componentsMap, CONGRATULATIONS_AUDIO_ID } from "./constants";
+import {
+  generateConfetti,
+  randomColor,
+  randomCongratulationsAudio,
+  resolveShapeAndColorAudio
+} from "./helper";
 import * as Actions from "../redux/completed/actions";
+
+const SHAPE_COLOR_AUDIO_ID = "shape-color-audio";
 
 const ShapeContainer = styled.div`
   width: 20%;
@@ -83,6 +88,7 @@ class Intro extends React.Component {
   }
 
   onShapeClick = index =>
+    !this.isLevelFinished() &&
     this.setState(prevState => {
       let {
         selectedShapesCount,
@@ -109,72 +115,74 @@ class Intro extends React.Component {
       };
     });
 
-  completeStage = event => {
-    const { setCompleted } = this.props;
-    const { id } = this.props.match.params;
+  isLevelFinished = () => {
+    const {
+      selectedShapesCount,
+      correctSelectedShapesCount,
+      correctShapesCount
+    } = this.state;
 
-    setCompleted(+id);
-
-    if (+id === 3) {
-      $("#modal").modal("show");
-      event.preventDefault();
-    }
+    return (
+      selectedShapesCount === correctSelectedShapesCount &&
+      correctSelectedShapesCount === correctShapesCount
+    );
   };
 
-  onPlayClick = () => {
-    $("#modal").modal("hide");
-    this.props.history.push("/play");
-  };
-
-  playAudio = () => document.getElementById("audio-player").play();
-
-  componentDidMount() {
-    this.playAudio();
-  }
+  playAudio = elementId => document.getElementById(elementId).play();
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevState.wantedShape !== this.state.wantedShape) {
-      this.playAudio();
+    if (this.isLevelFinished()) {
+      const {
+        match: {
+          params: { id }
+        }
+      } = this.props;
+
+      const confetti = generateConfetti();
+      confetti.render();
+
+      setTimeout(() => {
+        confetti.clear();
+        const isLastStage = +id === 3;
+        const redirectUrl = isLastStage ? "/play" : `/intro/${+id + 1}`;
+        this.props.history.push(redirectUrl);
+      }, 3000);
+
+      this.playAudio(CONGRATULATIONS_AUDIO_ID);
     }
   }
 
   render() {
-    const {
-      completed,
-      match: {
-        params: { id }
-      }
-    } = this.props;
-    const {
-      shapes,
-      selectedShapesCount,
-      correctSelectedShapesCount,
-      correctShapesCount,
-      wantedShape,
-      wantedColor
-    } = this.state;
+    const { shapes, wantedShape, wantedColor } = this.state;
 
     const wantedColorId = colorsMap[wantedColor];
 
-    const audioSrc = resolveShapeAndColorAudio(
+    const shapeAndColorAudio = resolveShapeAndColorAudio(
       `${wantedColorId}${wantedShape}`
     );
 
-    const playAudio = () => document.getElementById("audio-player").play();
-
-    const showNext =
-      completed ||
-      (selectedShapesCount === correctSelectedShapesCount &&
-        correctSelectedShapesCount === correctShapesCount);
+    const congratulationsAudio = randomCongratulationsAudio();
 
     return (
-      <div className="row no-gutters">
+      <div className="row">
+        <canvas id={CANVAS_ID} className="canvas full-height"></canvas>
+        <audio
+          id={SHAPE_COLOR_AUDIO_ID}
+          src={shapeAndColorAudio}
+          autoPlay
+        ></audio>
+        <audio
+          id={CONGRATULATIONS_AUDIO_ID}
+          src={congratulationsAudio}
+        ></audio>
         <div className="col-1"></div>
         <div className="col-10">
           <div className="full-height">
-            <audio id="audio-player" src={audioSrc} autoPlay></audio>
             <div className="text-center py-2">
-              <button className="btn btn-secondary" onClick={playAudio}>
+              <button
+                className="btn btn-secondary"
+                onClick={() => this.playAudio(SHAPE_COLOR_AUDIO_ID)}
+              >
                 <i className="fa fa-volume-up" />
               </button>
             </div>
@@ -197,40 +205,6 @@ class Intro extends React.Component {
                     </ShapeContainer>
                   );
                 })}
-              </div>
-            </div>
-            {showNext && (
-              <div className="text-center">
-                <Link
-                  className="unstyled-link"
-                  to={`/intro/${+id + 1}`}
-                  onClick={this.completeStage}
-                >
-                  <button className="btn btn-secondary">
-                    <i className="fa fa-arrow-right" />
-                  </button>
-                </Link>
-              </div>
-            )}
-          </div>
-          <div className="modal fade" id="modal" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-header align-items-center justify-content-center responsive-modal-text">
-                  <div className="modal-title">Браво!</div>
-                  <button type="button" className="close" data-dismiss="modal">
-                    <div className="responsive-modal-text">&times;</div>
-                  </button>
-                </div>
-                <div className="modal-body text-center responsive-modal-text">
-                  <div>Спремен си да играш</div>
-                  <button
-                    className="btn btn-secondary btn-lg"
-                    onClick={this.onPlayClick}
-                  >
-                    <i className="fa fa-play" />
-                  </button>
-                </div>
               </div>
             </div>
           </div>

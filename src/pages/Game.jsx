@@ -2,9 +2,17 @@ import * as React from "react";
 import styled from "styled-components";
 import { range, shuffle } from "lodash";
 import { parse } from "qs";
-import { componentsMap } from "./constants";
-import cardImg from "../card.png";
-import { generateShape } from "./helper";
+import {
+  CANVAS_ID,
+  componentsMap,
+  CONGRATULATIONS_AUDIO_ID
+} from "./constants";
+import {
+  generateConfetti,
+  generateShape,
+  randomCongratulationsAudio
+} from "./helper";
+import cardImg from "../images/card.png";
 
 const FlipContainer = styled.div`
   @media (min-width: 576px) {
@@ -25,29 +33,6 @@ const FlipContainer = styled.div`
 let ID = 0;
 
 export default class Game extends React.Component {
-  componentDidMount() {
-    this.props.history.replace("/play");
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    const { history, location } = this.props;
-
-    const queryStringObj = parse(location.search, {
-      ignoreQueryPrefix: true
-    });
-
-    if (queryStringObj.reset) {
-      history.replace("/play");
-
-      this.setState({
-        cardsCount: 6,
-        cards: this.generateCards(6),
-        selectedCards: [],
-        up: 0
-      });
-    }
-  }
-
   generateCards = cardsCount => {
     const cards = [];
     const pairsCount = cardsCount / 2;
@@ -137,19 +122,66 @@ export default class Game extends React.Component {
     }
   };
 
+  isLevelFinished = () => {
+    const { cardsCount, up } = this.state;
+
+    return cardsCount === up;
+  };
+
+  playAudio = elementId => document.getElementById(elementId).play();
+
+  componentDidMount() {
+    this.props.history.replace("/play");
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.isLevelFinished()) {
+      const confetti = generateConfetti();
+      confetti.render();
+
+      setTimeout(() => {
+        confetti.clear();
+        this.nextLevel();
+      }, 3000);
+
+      this.playAudio(CONGRATULATIONS_AUDIO_ID);
+    } else {
+      const { history, location } = this.props;
+
+      const queryStringObj = parse(location.search, {
+        ignoreQueryPrefix: true
+      });
+
+      if (queryStringObj.reset) {
+        history.replace("/play");
+
+        this.setState({
+          cardsCount: 6,
+          cards: this.generateCards(6),
+          selectedCards: [],
+          up: 0
+        });
+      }
+    }
+  }
+
   render() {
-    const { cards, cardsCount, selectedCards, up } = this.state;
+    const { cards, cardsCount, selectedCards } = this.state;
 
     if (selectedCards.length === 2) {
       this.compareCards(...selectedCards);
     }
 
     const level = (cardsCount - 6) / 2 + 1;
-    const finished = up === cardsCount;
-    const progressBarWidth = 25 * (finished ? level : level - 1);
+    const levelFinished = this.isLevelFinished();
+    const progressBarWidth = 25 * (levelFinished ? level : level - 1);
+
+    const congratulationsAudio = randomCongratulationsAudio();
 
     return (
       <div className="row">
+        <canvas id={CANVAS_ID} className="canvas full-height"></canvas>
+        <audio id={CONGRATULATIONS_AUDIO_ID} src={congratulationsAudio}></audio>
         <div className="col-1" />
         <div className="col-10">
           <div className="full-height">
@@ -184,13 +216,6 @@ export default class Game extends React.Component {
                 );
               })}
             </div>
-            {finished && (
-              <div className="text-center">
-                <button className="btn btn-secondary" onClick={this.nextLevel}>
-                  <i className="fa fa-arrow-right" />
-                </button>
-              </div>
-            )}
           </div>
         </div>
         <div className="col-1"></div>

@@ -1,20 +1,21 @@
-import { colors, shapes } from "./constants";
-import square from "../audio/square.mp4";
-import rectangle from "../audio/rectangle.mp4";
-import triangle from "../audio/triangle.mp4";
-import circle from "../audio/circle.mp4";
-import redSquare from "../audio/red-square.mp4";
-import redRectangle from "../audio/red-rectangle.mp4";
-import redTriangle from "../audio/red-triangle.mp4";
-import redCircle from "../audio/red-circle.mp4";
-import blueSquare from "../audio/blue-square.mp4";
-import blueRectangle from "../audio/blue-rectangle.mp4";
-import blueTriangle from "../audio/blue-triangle.mp4";
-import blueCircle from "../audio/blue-circle.mp4";
-import greenSquare from "../audio/green-square.mp4";
-import greenRectangle from "../audio/green-rectangle.mp4";
-import greenTriangle from "../audio/green-triangle.mp4";
-import greenCircle from "../audio/green-circle.mp4";
+import { CANVAS_ID, colors, congratulationsSounds, shapes } from "./constants";
+import ConfettiGenerator from "confetti-js";
+import square from "../audio/shapes/square.mp4";
+import rectangle from "../audio/shapes/rectangle.mp4";
+import triangle from "../audio/shapes/triangle.mp4";
+import circle from "../audio/shapes/circle.mp4";
+import redSquare from "../audio/shapes/red-square.mp4";
+import redRectangle from "../audio/shapes/red-rectangle.mp4";
+import redTriangle from "../audio/shapes/red-triangle.mp4";
+import redCircle from "../audio/shapes/red-circle.mp4";
+import blueSquare from "../audio/shapes/blue-square.mp4";
+import blueRectangle from "../audio/shapes/blue-rectangle.mp4";
+import blueTriangle from "../audio/shapes/blue-triangle.mp4";
+import blueCircle from "../audio/shapes/blue-circle.mp4";
+import greenSquare from "../audio/shapes/green-square.mp4";
+import greenRectangle from "../audio/shapes/green-rectangle.mp4";
+import greenTriangle from "../audio/shapes/green-triangle.mp4";
+import greenCircle from "../audio/shapes/green-circle.mp4";
 
 export const randomColor = () => {
   const randomNumber = Math.ceil(Math.random() * 10);
@@ -56,4 +57,21 @@ export const resolveShapeAndColorAudio = s => {
   };
 
   return audioMap[s];
+};
+
+export const randomCongratulationsAudio = () => {
+  const randomNumber = Math.ceil(Math.random() * 10);
+  const soundsCount = congratulationsSounds.length;
+  return congratulationsSounds[randomNumber % soundsCount];
+};
+
+export const generateConfetti = () => {
+  const confettiSettings = {
+    target: CANVAS_ID,
+    max: 200,
+    size: 1.5,
+    rotate: true
+  };
+
+  return new ConfettiGenerator(confettiSettings);
 };
