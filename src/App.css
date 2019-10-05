@@ -36,31 +36,19 @@
   .full-height {
     height: calc(100vh - 68px) !important;
   }
+
+  .navigation-icon {
+    font-size: 4vw !important;
+  }
 }
 
 .menu-image {
   padding-top: 30px;
 }
 
-.shapes-row {
-  height: calc(45vh - 64px);
-}
-
 .shape {
   height: 100%;
   width: 100%;
-}
-
-.responsive-text {
-  font-size: 4vw;
-}
-
-.responsive-modal-text {
-  font-size: 10vh;
-}
-
-.np {
-  font-size: 4vw;
 }
 
 .unstyled-link {
@@ -79,6 +67,11 @@
 
 .intro-shape {
   width: 50%;
+  max-height: calc(100% - 80px);
+}
+
+.intro-audio {
+  margin-top: 30px;
 }
 
 .intro-selected-shape {
