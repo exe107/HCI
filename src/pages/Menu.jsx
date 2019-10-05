@@ -4,7 +4,7 @@ import shapes from "../images/shapes.jpg";
 
 const Menu = () => (
   <div className="home-full-height app-bg">
-    <div className="menu-image pt-5 text-center">
+    <div className="menu-image text-center">
       <img className="w-50 h-100" src={shapes} />
     </div>
     <div className="d-flex menu-buttons flex-column justify-content-center">
