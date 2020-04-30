@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-free": "^5.9.0",
     "bootstrap": "^4.3.1",
     "confetti-js": "^0.0.15",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.11",
     "popper.js": "^1.15.0",
     "prettier": "^1.17.0",
