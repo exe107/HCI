@@ -7,7 +7,7 @@
     "bootstrap": "^4.3.1",
     "confetti-js": "^0.0.15",
     "jquery": "^3.4.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "popper.js": "^1.15.0",
     "prettier": "^1.17.0",
     "qs": "^6.8.0",
